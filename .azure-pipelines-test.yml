@@ -21,3 +21,4 @@ steps:
     testRunTitle: Tests ($(Agent.OS))
   condition: succeededOrFailed()
   displayName: Publish test results
+    
