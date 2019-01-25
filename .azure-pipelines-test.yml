@@ -11,7 +11,7 @@ steps:
 - script: yarn install
   displayName: Install dependencies
 
-- script: |
+- bash: |
     node -p "var g = require('glob'); var f = g.sync('test/**/*-test.js'); f"
     npm install -g tap-dot
     yarn run tape | tap-dot
