@@ -5,7 +5,27 @@
 #
 
 jobs:
-- job: Linux
+- job: linux
+  displayName: Test (Linux)
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+  - template: .azure-pipelines-steps.yml
+
+  - script: yarn run lint:ci
+    displayName: Run lint
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: test-results/lint.xml
+      testRunTitle: Lint
+    condition: succeededOrFailed()
+    displayName: Publish lint results
+
+- job: lint
+  displayName: Lint
+  dependsOn: linux
   pool:
     vmImage: ubuntu-16.04
   steps:
@@ -23,12 +43,14 @@ jobs:
     displayName: Publish lint results
 
 - job: macOS
+  displayName: Test (macOS)
   pool:
     vmImage: macOS-10.13
   steps:
   - template: .azure-pipelines-steps.yml
 
-- job: Windows
+- job: windows
+  displayName: Test (Windows)
   pool:
     vmImage: vs2017-win2016
   steps:
