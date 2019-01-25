@@ -12,9 +12,7 @@ steps:
   displayName: Install dependencies
 
 - bash: |
-    node -p "var g = require('glob'); var f = g.sync('test/**/*-test.js'); f"
-    npm install -g tap-dot
-    yarn run tape | tap-dot
+    yarn run tape
     yarn run tape:ci
   displayName: Run tests
 
