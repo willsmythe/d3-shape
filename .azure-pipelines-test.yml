@@ -11,7 +11,7 @@ steps:
 - script: yarn install
   displayName: Install dependencies
 
-- script: yarn run tape:ci
+- bash: yarn run tape:ci
   displayName: Run tests
 
 - task: PublishTestResults@2

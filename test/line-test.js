@@ -5,7 +5,7 @@ require("./pathEqual");
 
 tape("line() returns a default line shape", function(test) {
   var l = shape.line();
-  test.equal(l.x()([42, 34]), 42);
+  test.equal(l.x()([42, 34]), 45);
   test.equal(l.y()([42, 34]), 34);
   test.equal(l.defined()([42, 34]), true);
   test.equal(l.curve(), shape.curveLinear);
