@@ -12,7 +12,8 @@ steps:
   displayName: Install dependencies
 
 - script: |
-    yarn run tape
+    npm install -g tap-dot
+    yarn run tape | tap-dot
     yarn run tape:ci
   displayName: Run tests
 
