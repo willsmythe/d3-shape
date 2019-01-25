@@ -1,5 +1,5 @@
 #
-# Azure Pipelines build steps common to all platforms.
+# Azure Pipelines build and test steps common to all platforms.
 #
 
 steps:

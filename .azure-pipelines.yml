@@ -10,18 +10,21 @@ jobs:
   pool:
     vmImage: ubuntu-16.04
   steps:
-  - template: .azure-pipelines-steps.yml
+  - template: .azure-pipelines-test.yml
 
-  - script: yarn run lint:ci
-    displayName: Run lint
+- job: macOS
+  displayName: Test (macOS)
+  pool:
+    vmImage: macOS-10.13
+  steps:
+  - template: .azure-pipelines-test.yml
 
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: JUnit
-      testResultsFiles: test-results/lint.xml
-      testRunTitle: Lint
-    condition: succeededOrFailed()
-    displayName: Publish lint results
+- job: windows
+  displayName: Test (Windows)
+  pool:
+    vmImage: vs2017-win2016
+  steps:
+  - template: .azure-pipelines-test.yml
 
 - job: lint
   displayName: Lint
@@ -29,7 +32,8 @@ jobs:
   pool:
     vmImage: ubuntu-16.04
   steps:
-  - template: .azure-pipelines-steps.yml
+  - script: yarn install
+    displayName: Install dependencies
 
   - script: yarn run lint:ci
     displayName: Run lint
@@ -41,17 +45,3 @@ jobs:
       testRunTitle: Lint
     condition: succeededOrFailed()
     displayName: Publish lint results
-
-- job: macOS
-  displayName: Test (macOS)
-  pool:
-    vmImage: macOS-10.13
-  steps:
-  - template: .azure-pipelines-steps.yml
-
-- job: windows
-  displayName: Test (Windows)
-  pool:
-    vmImage: vs2017-win2016
-  steps:
-  - template: .azure-pipelines-steps.yml
